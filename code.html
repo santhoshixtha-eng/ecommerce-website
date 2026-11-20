@@ -1,0 +1,2173 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<title>Sandy Mart — Mega Deals, Tech, Fashion &amp; Prime Delivery</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Plus Jakarta Sans & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@600;700;800;900&amp;display=swap" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Inter"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              blue: '#1D4ED8',
+              navy: '#0F172A',
+              orange: '#FF9900',
+              sunset: '#F97316',
+              emerald: '#10B981',
+              violet: '#8B5CF6',
+              pink: '#EC4899',
+              surface: '#F8FAFC',
+            }
+          },
+          animation: {
+            'pulse-fast': 'pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'floatSlow 4s ease-in-out infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+          },
+          keyframes: {
+            floatSlow: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    :root {
+      --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding-bottom: 0;
+      }
+    }
+
+    /* Custom Vibrant Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #FF9900, #EC4899, #1D4ED8);
+      border-radius: 9999px;
+    }
+
+    /* Scroll Reveal */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s var(--ease-spring), transform 0.65s var(--ease-spring);
+      will-change: opacity, transform;
+    }
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Cart Bounce Animation */
+    @keyframes cartPop {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.35) rotate(-6deg); }
+      70% { transform: scale(0.9) rotate(3deg); }
+      100% { transform: scale(1) rotate(0); }
+    }
+    .animate-cart-pop {
+      animation: cartPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* Floating Toast Animation */
+    @keyframes toastSlide {
+      0% { transform: translate(-50%, 40px); opacity: 0; }
+      100% { transform: translate(-50%, 0); opacity: 1; }
+    }
+    .animate-toast {
+      animation: toastSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Gradient Text & Borders */
+    .text-gradient-sandy {
+      background: linear-gradient(135deg, #FF9900 0%, #EC4899 50%, #3B82F6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .border-gradient-sandy {
+      border-image: linear-gradient(135deg, #FF9900, #EC4899, #1D4ED8) 1;
+    }
+
+    /* Hide scrollbars for smooth scrolling strips */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* Glassmorphism helpers */
+    .glass-nav {
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Pulse Glow */
+    .glow-orange {
+      box-shadow: 0 0 25px rgba(255, 153, 0, 0.4);
+    }
+  </style>
+</head>
+<body class="selection:bg-orange-500 selection:text-white">
+<!-- Top Progress Bar -->
+<div class="fixed top-0 left-0 right-0 h-1.5 z-50 pointer-events-none">
+<div class="h-full w-full origin-left scale-x-0 bg-gradient-to-r from-[#FF9900] via-[#EC4899] to-[#1D4ED8] transition-transform duration-75 ease-out shadow-sm" id="scroll-progress-bar" style="transform: scaleX(0.388199);"></div>
+</div>
+<!-- STICKY HEADER -->
+<header class="sticky top-0 z-40 shadow-xl">
+<!-- Top Announcement Strip (Mobile-first Marquee/Compact) -->
+<div class="bg-gradient-to-r from-amber-500 via-pink-600 to-indigo-700 text-white text-[11px] sm:text-xs py-1.5 px-3 font-semibold flex items-center justify-between">
+<div class="flex items-center gap-2 overflow-hidden whitespace-nowrap">
+<span class="px-1.5 py-0.2 rounded bg-black/30 font-extrabold uppercase text-[10px] tracking-wider">SANDY FLASH</span>
+<span class="animate-pulse">🔥 MEGA FESTIVAL 2026: Extra 10% OFF with code <b>SANDY10</b></span>
+</div>
+<button class="hidden sm:inline-flex items-center gap-1 bg-white/20 hover:bg-white/30 px-2 py-0.5 rounded-full text-[11px] transition-all flex-shrink-0" id="copy-promo-top">
+<span>Copy Code</span>
+</button>
+</div>
+<!-- Main Marketplace Navbar -->
+<div class="glass-nav text-white border-b border-white/10">
+<div class="max-w-[1440px] mx-auto px-3.5 sm:px-6 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+<!-- Row 1 (Mobile): Logo + Deliver To + Cart & Wishlist -->
+<div class="flex items-center justify-between gap-3 w-full sm:w-auto">
+<!-- Logo -->
+<a class="flex items-center gap-2 group flex-shrink-0" href="#">
+<div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#FF9900] via-[#F97316] to-[#EC4899] flex items-center justify-center shadow-lg group-hover:scale-105 active:scale-95 transition-transform duration-200">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+<path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="leading-none">
+<span class="font-display font-black text-xl sm:text-2xl tracking-tight text-white">
+                Sandy<span class="text-[#FF9900]">Mart</span>
+</span>
+<!-- Curved Smile / Swift Line -->
+<svg class="w-16 sm:w-20 h-2 -mt-0.5 text-[#FF9900]" fill="none" viewBox="0 0 100 16">
+<path d="M4 4C28 15 68 15 92 4" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+<path d="M85 2L94 4L89 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</div>
+</a>
+<!-- Location Selector (Mobile & Desktop) -->
+<button aria-label="Change delivery location" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 active:scale-95 border border-white/15 text-left transition-all" id="location-btn">
+<svg class="w-3.5 h-3.5 text-[#FF9900] flex-shrink-0 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" fill-rule="evenodd"></path>
+</svg>
+<div class="leading-tight truncate max-w-[85px] sm:max-w-none">
+<span class="hidden sm:block text-[10px] text-slate-400 font-medium">Deliver to Sandy</span>
+<span class="block text-[11px] sm:text-xs font-bold text-white truncate" id="delivery-city-label">Madurai 625001</span>
+</div>
+</button>
+<!-- Top Action Buttons (Wishlist & Cart) -->
+<div class="flex items-center gap-2">
+<!-- Wishlist -->
+<button aria-label="Wishlist" class="relative w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all" id="wishlist-header-btn">
+<svg class="w-4 h-4 text-pink-400" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" fill-rule="evenodd"></path>
+</svg>
+<span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-pink-500 text-[10px] font-bold flex items-center justify-center shadow-sm" id="wishlist-badge">2</span>
+</button>
+<!-- Cart Trigger Button -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#FF9900] via-[#F97316] to-[#EA580C] hover:brightness-110 active:scale-95 text-slate-950 font-bold shadow-md shadow-orange-500/25 transition-all" id="open-cart-btn">
+<div class="relative">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+<path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute -top-2 -right-2.5 min-w-[18px] h-[18px] px-1 rounded-full bg-slate-950 text-[#FF9900] text-[10px] font-black flex items-center justify-center border border-[#FF9900]" id="header-cart-count">2</span>
+</div>
+<span class="hidden md:inline text-xs font-extrabold uppercase">Cart</span>
+</button>
+</div>
+</div>
+<!-- Row 2 (Full Width Interactive Search with Live Filter & Category Dropdown) -->
+<form class="w-full sm:flex-1 sm:max-w-2xl flex items-stretch rounded-xl overflow-hidden bg-white shadow-inner ring-2 ring-transparent focus-within:ring-[#FF9900] transition-all" id="marketplace-search-form">
+<select aria-label="Search Category" class="bg-slate-100 text-slate-800 text-xs font-bold px-2.5 border-r border-slate-200 focus:outline-none cursor-pointer" id="search-category-select">
+<option value="all">All</option>
+<option value="Electronics">Tech</option>
+<option value="Fashion">Fashion</option>
+<option value="Gaming">Gaming</option>
+<option value="Home">Home</option>
+</select>
+<input class="flex-1 min-w-0 px-3 py-2 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none" id="search-input" placeholder="Search headphones, shoes, gaming rigs..." type="text">
+<button aria-label="Search" class="px-4 bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 hover:brightness-110 active:brightness-95 flex items-center justify-center transition-all" type="submit">
+<svg class="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</form>
+</div>
+</div>
+<!-- Category Quick-Pills Filter Bar (Snap Scroll for smooth mobile thumb action) -->
+<div class="bg-slate-900/95 border-b border-white/10 text-white">
+<div class="max-w-[1440px] mx-auto px-3 sm:px-6 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar snap-x snap-mandatory text-xs font-bold">
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-gradient-to-r from-orange-500 via-pink-500 to-rose-600 text-white shadow-md active:scale-95 transition-all" data-nav-filter="deals">
+          Mega Deals 🔥
+        </button>
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-violet-600/90 hover:bg-violet-500 active:scale-95 text-white transition-all" data-nav-filter="lightning">
+          Lightning Drops ⚡
+        </button>
+<button class="subnav-pill active snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white text-slate-950 shadow-sm transition-all" data-nav-filter="all">
+          All Products
+        </button>
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-slate-200 transition-all" data-nav-filter="Electronics">
+          Electronics
+        </button>
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-slate-200 transition-all" data-nav-filter="Fashion">
+          Fashion
+        </button>
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-slate-200 transition-all" data-nav-filter="Gaming">
+          Gaming Rigs
+        </button>
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-slate-200 transition-all" data-nav-filter="Home">
+          Home &amp; Living
+        </button>
+<button class="subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 hover:bg-emerald-500/30 transition-all" data-nav-filter="bestsellers">
+          Top Rated ★
+        </button>
+</div>
+</div>
+</header>
+<!-- HERO SECTION WITH VIBRANT ANIMATED PARTICLES & SLIDER -->
+<section class="relative overflow-hidden bg-slate-950 text-white" id="hero-section">
+<!-- Animated Gradient Mesh Backdrop -->
+<div class="absolute inset-0 bg-gradient-to-br from-[#1D4ED8] via-[#7C3AED] to-[#EC4899] opacity-90 transition-all duration-700" id="hero-bg-gradient">
+<!-- Ambient Glowing Orbs -->
+<div class="absolute -top-20 -left-20 w-64 sm:w-96 h-64 sm:h-96 rounded-full bg-[#FF9900]/30 blur-3xl animate-pulse"></div>
+<div class="absolute bottom-0 right-0 w-72 sm:w-[480px] h-72 sm:h-[480px] rounded-full bg-cyan-400/20 blur-3xl animate-pulse" style="animation-delay: 1.5s;"></div>
+</div>
+<div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-8 py-8 sm:py-16">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Left Hero Copy -->
+<div class="lg:col-span-7 space-y-4 sm:space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-300">
+<span class="w-2 h-2 rounded-full bg-[#FF9900] animate-ping"></span>
+<span id="hero-badge-text">SANDY PRIME FESTIVAL • UP TO 65% OFF</span>
+</div>
+<h1 class="font-display font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight leading-tight" id="hero-title">
+            Next-Gen Tech &amp; <span class="text-[#FF9900]">Super Deals</span> Delivered Fast.
+          </h1>
+<p class="text-sm sm:text-base text-blue-100 max-w-xl leading-relaxed" id="hero-subtitle">
+            Flagship audio, RGB mechanical keyboards, streetwear sneakers, and smart home essentials with guaranteed Prime same-day delivery.
+          </p>
+<!-- Action CTA & Promo Pill -->
+<div class="flex flex-wrap items-center gap-3 pt-2">
+<a class="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#FF9900] to-[#F97316] hover:brightness-110 active:scale-95 text-slate-950 font-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-orange-500/30 transition-all flex items-center gap-2" href="#lightning-deals">
+<span>Shop Lightning Drops</span>
+<span>⚡</span>
+</a>
+<a class="px-5 py-3 rounded-2xl bg-white/15 hover:bg-white/25 active:scale-95 backdrop-blur-md border border-white/20 text-white font-bold text-xs sm:text-sm transition-all" href="#marketplace-catalog">
+              Browse 50+ Items
+            </a>
+</div>
+<!-- Slider Indicators -->
+<div class="flex items-center gap-3 pt-3">
+<div class="flex items-center gap-2">
+<button aria-label="Slide 1" class="hero-dot w-8 h-2 rounded-full bg-[#FF9900] transition-all" data-slide="0"></button>
+<button aria-label="Slide 2" class="hero-dot w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all" data-slide="1"></button>
+<button aria-label="Slide 3" class="hero-dot w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all" data-slide="2"></button>
+</div>
+<span class="text-[11px] text-amber-200 font-semibold">Touch to explore banners</span>
+</div>
+</div>
+<!-- Right Floating 3D Bento Card -->
+<div class="lg:col-span-5 relative">
+<div class="glass-card animate-float border border-white/25 rounded-3xl p-4 sm:p-6 shadow-2xl relative overflow-hidden group" id="hero-featured-card">
+<div class="flex items-center justify-between mb-3">
+<span class="px-2.5 py-1 rounded-full bg-emerald-500 text-slate-950 text-[10px] sm:text-xs font-black uppercase tracking-wider" id="hero-card-tag">
+                Prime Deal • 42% OFF
+              </span>
+<span class="text-xs font-bold text-amber-300">★ 4.9 (2,480)</span>
+</div>
+<!-- Product Image -->
+<div class="rounded-2xl overflow-hidden bg-slate-900/50 aspect-[16/10] mb-4 relative">
+<img alt="Sony WH-1000XM6" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" id="hero-card-img" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+<div class="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-black/60 backdrop-blur-md text-[10px] font-bold text-emerald-400">
+                ⚡ Fastest Selling
+              </div>
+</div>
+<!-- Price & Quick Add -->
+<div class="flex items-center justify-between gap-3">
+<div class="min-w-0">
+<h2 class="font-display font-bold text-base sm:text-lg truncate text-white" id="hero-card-title">Sony WH-1000XM6 ANC</h2>
+<div class="flex items-baseline gap-2">
+<span class="font-display font-black text-xl text-[#FF9900]" id="hero-card-price">₹18,999</span>
+<span class="text-xs text-slate-300 line-through" id="hero-card-mrp">₹32,990</span>
+</div>
+</div>
+<button class="px-4 py-2.5 rounded-xl bg-white text-slate-950 font-black text-xs uppercase tracking-wider hover:bg-[#FF9900] active:scale-95 transition-all shadow-md" data-product-id="anc-headphones" id="hero-quick-add">
+                + Add
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- QUICK BENTO CATEGORY TILES (Mobile 2x2, Desktop 4 Cols) -->
+<section class="max-w-[1440px] mx-auto px-3.5 sm:px-8 -mt-5 relative z-20">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<!-- Card 1 -->
+<button class="cat-bento-tile group text-left bg-white rounded-2xl p-3.5 sm:p-4 shadow-md hover:shadow-xl border-2 border-transparent hover:border-blue-500 active:scale-95 transition-all flex items-center sm:block gap-3" data-cat-jump="Electronics">
+<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center text-xl sm:text-2xl sm:mb-2.5 shadow-sm group-hover:scale-110 transition-transform">
+          📱
+        </div>
+<div>
+<h3 class="font-display font-bold text-slate-900 text-xs sm:text-sm">Smartphones</h3>
+<p class="text-[10px] sm:text-xs text-emerald-600 font-bold">Up to 35% Off</p>
+</div>
+</button>
+<!-- Card 2 -->
+<button class="cat-bento-tile group text-left bg-white rounded-2xl p-3.5 sm:p-4 shadow-md hover:shadow-xl border-2 border-transparent hover:border-pink-500 active:scale-95 transition-all flex items-center sm:block gap-3" data-cat-jump="Electronics">
+<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 text-white flex items-center justify-center text-xl sm:text-2xl sm:mb-2.5 shadow-sm group-hover:scale-110 transition-transform">
+          🎧
+        </div>
+<div>
+<h3 class="font-display font-bold text-slate-900 text-xs sm:text-sm">Pro Audio</h3>
+<p class="text-[10px] sm:text-xs text-pink-600 font-bold">From ₹1,499</p>
+</div>
+</button>
+<!-- Card 3 -->
+<button class="cat-bento-tile group text-left bg-white rounded-2xl p-3.5 sm:p-4 shadow-md hover:shadow-xl border-2 border-transparent hover:border-orange-500 active:scale-95 transition-all flex items-center sm:block gap-3" data-cat-jump="Fashion">
+<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 text-white flex items-center justify-center text-xl sm:text-2xl sm:mb-2.5 shadow-sm group-hover:scale-110 transition-transform">
+          👟
+        </div>
+<div>
+<h3 class="font-display font-bold text-slate-900 text-xs sm:text-sm">Sneakers</h3>
+<p class="text-[10px] sm:text-xs text-orange-600 font-bold">Flat 50% Off</p>
+</div>
+</button>
+<!-- Card 4 -->
+<button class="cat-bento-tile group text-left bg-white rounded-2xl p-3.5 sm:p-4 shadow-md hover:shadow-xl border-2 border-transparent hover:border-purple-500 active:scale-95 transition-all flex items-center sm:block gap-3" data-cat-jump="Gaming">
+<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-700 text-white flex items-center justify-center text-xl sm:text-2xl sm:mb-2.5 shadow-sm group-hover:scale-110 transition-transform">
+          🎮
+        </div>
+<div>
+<h3 class="font-display font-bold text-slate-900 text-xs sm:text-sm">Gaming Gear</h3>
+<p class="text-[10px] sm:text-xs text-purple-600 font-bold">RGB Mechanicals</p>
+</div>
+</button>
+</div>
+</section>
+<!-- LIGHTNING DEALS SECTION WITH LIVE COUNTDOWN TIMER -->
+<section class="max-w-[1440px] mx-auto px-3.5 sm:px-8 pt-10 sm:pt-14 pb-8" id="lightning-deals">
+<div class="bg-white rounded-3xl p-4 sm:p-8 shadow-sm border border-slate-200/80">
+<!-- Section Header with Live Countdown -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-100">
+<div class="flex items-center gap-2.5">
+<span class="px-2.5 py-1 rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 text-white font-display font-black text-[10px] sm:text-xs uppercase tracking-wider shadow-sm">
+            ⚡ Flash Drops
+          </span>
+<h2 class="font-display font-black text-lg sm:text-2xl text-slate-900">
+            Deals Ending Soon
+          </h2>
+</div>
+<!-- Timer -->
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Closes in:</span>
+<div class="flex items-center gap-1 font-mono font-black text-xs sm:text-sm">
+<span class="px-2 py-1 rounded-lg bg-slate-950 text-[#FF9900]" id="timer-hours">04</span>
+<span class="text-slate-900 font-bold">:</span>
+<span class="px-2 py-1 rounded-lg bg-slate-950 text-[#FF9900]" id="timer-mins">34</span>
+<span class="text-slate-900 font-bold">:</span>
+<span class="px-2 py-1 rounded-lg bg-pink-600 text-white animate-pulse" id="timer-secs">46</span>
+</div>
+</div>
+</div>
+<!-- Lightning Grid (Responsive 2 Cols Mobile, 4 Cols Desktop) -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6" id="lightning-grid">
+        <div class="group relative bg-white border border-slate-100 hover:border-[#FF9900]/40 rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2 sm:mb-3">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-[#FF9900] text-slate-950 text-[10px] font-black uppercase shadow">
+              42% OFF
+            </span>
+            <button onclick="toggleWishlist('anc-headphones', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-pink-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Sony WH-1000XM6 ANC" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('anc-headphones')">
+          </div>
+
+          <div>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1">
+              <span>★ 4.9</span>
+              <span class="text-slate-400">(2480)</span>
+            </div>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1" onclick="openQuickView('anc-headphones')">
+              Sony WH-1000XM6 ANC
+            </h4>
+            <div class="flex items-baseline gap-1.5 mb-2.5">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹18,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹32,990</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('anc-headphones')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('anc-headphones')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-[11px] uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group relative bg-white border border-slate-100 hover:border-[#FF9900]/40 rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2 sm:mb-3">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-[#FF9900] text-slate-950 text-[10px] font-black uppercase shadow">
+              30% OFF
+            </span>
+            <button onclick="toggleWishlist('rgb-keyboard', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Keychron Q1 Pro Mechanical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('rgb-keyboard')">
+          </div>
+
+          <div>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1">
+              <span>★ 4.8</span>
+              <span class="text-slate-400">(940)</span>
+            </div>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1" onclick="openQuickView('rgb-keyboard')">
+              Keychron Q1 Pro Mechanical
+            </h4>
+            <div class="flex items-baseline gap-1.5 mb-2.5">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹12,499</span>
+              <span class="text-[10px] text-slate-400 line-through">₹17,999</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('rgb-keyboard')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('rgb-keyboard')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-[11px] uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group relative bg-white border border-slate-100 hover:border-[#FF9900]/40 rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2 sm:mb-3">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-[#FF9900] text-slate-950 text-[10px] font-black uppercase shadow">
+              28% OFF
+            </span>
+            <button onclick="toggleWishlist('smart-watch-ultra', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Apex Watch Ultra 2 Titanium" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('smart-watch-ultra')">
+          </div>
+
+          <div>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1">
+              <span>★ 4.9</span>
+              <span class="text-slate-400">(1620)</span>
+            </div>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1" onclick="openQuickView('smart-watch-ultra')">
+              Apex Watch Ultra 2 Titanium
+            </h4>
+            <div class="flex items-baseline gap-1.5 mb-2.5">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹24,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹34,900</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('smart-watch-ultra')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('smart-watch-ultra')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-[11px] uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group relative bg-white border border-slate-100 hover:border-[#FF9900]/40 rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2 sm:mb-3">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-[#FF9900] text-slate-950 text-[10px] font-black uppercase shadow">
+              31% OFF
+            </span>
+            <button onclick="toggleWishlist('dunk-sneakers', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-pink-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Nike Dunk Low Retro Panda" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('dunk-sneakers')">
+          </div>
+
+          <div>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1">
+              <span>★ 4.7</span>
+              <span class="text-slate-400">(3120)</span>
+            </div>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1" onclick="openQuickView('dunk-sneakers')">
+              Nike Dunk Low Retro Panda
+            </h4>
+            <div class="flex items-baseline gap-1.5 mb-2.5">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹8,295</span>
+              <span class="text-[10px] text-slate-400 line-through">₹11,995</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('dunk-sneakers')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('dunk-sneakers')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-[11px] uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm">
+              + Add
+            </button>
+          </div>
+        </div>
+      </div>
+</div>
+</section>
+<!-- PRODUCT SPOTLIGHT / INTERACTIVE 3-TIER UNBOXING STAGE -->
+<section class="py-12 sm:py-20 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white my-6" id="spotlight-section">
+<div class="max-w-[1440px] mx-auto px-3.5 sm:px-8">
+<div class="mb-8">
+<span class="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-2">
+          Interactive Spotlight
+        </span>
+<h2 class="font-display font-black text-2xl sm:text-4xl">
+          Scroll &amp; Tap to Unbox <span class="text-gradient-sandy">2026 Flagships</span>
+</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Pinned Stage on Desktop -->
+<div class="hidden lg:block lg:col-span-6 lg:sticky lg:top-32 z-30">
+<div class="relative rounded-3xl overflow-hidden p-6 sm:p-8 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 backdrop-blur-xl border border-white/20 shadow-2xl">
+<div class="flex items-center justify-between mb-4">
+<span class="px-3 py-1 rounded-full bg-[#FF9900] text-slate-950 text-xs font-black uppercase" id="spotlight-badge">Spotlight 01 / 03</span>
+<span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-bold">
+                ✓ Free Prime Dispatch
+              </span>
+</div>
+<div class="relative aspect-[16/11] rounded-2xl overflow-hidden bg-slate-950 mb-5">
+<img alt="Sony ANC" class="spotlight-stage-img absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-100 scale-100" id="spotlight-img-0" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" style="opacity: 1; transform: scale(1);">
+<img alt="Keychron RGB" class="spotlight-stage-img absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" id="spotlight-img-1" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" style="opacity: 0; transform: scale(1.05);">
+<img alt="Apex Ultra Watch" class="spotlight-stage-img absolute inset-0 w-full h-full object-cover transition-all duration-700 opacity-0 scale-105" id="spotlight-img-2" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg" style="opacity: 0; transform: scale(1.05);">
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-300" id="spotlight-stage-label">Dual QN3 Studio Acoustic</span>
+<div class="flex items-center gap-1.5">
+<span class="w-7 h-2 rounded-full bg-[#FF9900] transition-all" id="spot-dot-0"></span>
+<span class="w-2.5 h-2 rounded-full bg-white/30 transition-all" id="spot-dot-1"></span>
+<span class="w-2.5 h-2 rounded-full bg-white/30 transition-all" id="spot-dot-2"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Spotlight Chapters (Mobile Cards with images inline) -->
+<div class="lg:col-span-6 space-y-6 sm:space-y-10">
+<!-- Chapter 1 -->
+<div class="spotlight-item bg-white/5 border border-white/10 hover:border-[#FF9900]/50 rounded-2xl sm:rounded-3xl p-4 sm:p-7 transition-all" data-badge="Spotlight 01 / 03" data-label="Dual QN3 Studio Acoustic" data-spot="0">
+<div class="lg:hidden rounded-xl overflow-hidden aspect-[16/10] bg-slate-900 mb-3.5">
+<img alt="Sony WH-1000XM6" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FF9900] block mb-1">Acoustic Engineering</span>
+<h3 class="font-display font-black text-lg sm:text-2xl mb-2 text-white">Sony WH-1000XM6 Studio ANC</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+              Dual QN3 noise-cancelling processors eliminate 99.4% ambient city noise with high-resolution LDAC spatial surround sound.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-4">
+<span class="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300 text-[10px] sm:text-xs font-bold">40h Battery</span>
+<span class="px-2.5 py-1 rounded-lg bg-pink-500/20 text-pink-300 text-[10px] sm:text-xs font-bold">Multipoint BT 5.4</span>
+<span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-xs font-bold">Hi-Res Audio</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/10">
+<div>
+<span class="font-display font-black text-xl sm:text-2xl text-white">₹18,999</span>
+<span class="text-xs text-slate-400 line-through ml-2">₹32,990</span>
+</div>
+<button class="spotlight-add-btn px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-xs uppercase tracking-wider active:scale-95 transition-all" data-product-id="anc-headphones">
+                + Add to Cart
+              </button>
+</div>
+</div>
+<!-- Chapter 2 -->
+<div class="spotlight-item bg-white/5 border border-white/10 hover:border-pink-500/50 rounded-2xl sm:rounded-3xl p-4 sm:p-7 transition-all" data-badge="Spotlight 02 / 03" data-label="CNC Aluminium Per-Key RGB" data-spot="1">
+<div class="lg:hidden rounded-xl overflow-hidden aspect-[16/10] bg-slate-900 mb-3.5">
+<img alt="Keychron Q1 Pro" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-pink-400 block mb-1">Esports Precision</span>
+<h3 class="font-display font-black text-lg sm:text-2xl mb-2 text-white">Keychron Q1 Pro RGB Mechanical</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+              CNC-machined 6063 aluminium body with double gasket mount, hot-swappable tactile switches, and customizable QMK/VIA keymaps.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-4">
+<span class="px-2.5 py-1 rounded-lg bg-violet-500/20 text-violet-300 text-[10px] sm:text-xs font-bold">Hot-Swappable</span>
+<span class="px-2.5 py-1 rounded-lg bg-orange-500/20 text-orange-300 text-[10px] sm:text-xs font-bold">1000Hz Polling</span>
+<span class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 text-[10px] sm:text-xs font-bold">RGB Per-Key</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/10">
+<div>
+<span class="font-display font-black text-xl sm:text-2xl text-white">₹12,499</span>
+<span class="text-xs text-slate-400 line-through ml-2">₹17,999</span>
+</div>
+<button class="spotlight-add-btn px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-violet-600 text-white font-black text-xs uppercase tracking-wider active:scale-95 transition-all" data-product-id="rgb-keyboard">
+                + Add to Cart
+              </button>
+</div>
+</div>
+<!-- Chapter 3 -->
+<div class="spotlight-item bg-white/5 border border-white/10 hover:border-emerald-500/50 rounded-2xl sm:rounded-3xl p-4 sm:p-7 transition-all" data-badge="Spotlight 03 / 03" data-label="Grade-5 Aerospace Titanium" data-spot="2">
+<div class="lg:hidden rounded-xl overflow-hidden aspect-[16/10] bg-slate-900 mb-3.5">
+<img alt="Apex Watch Ultra" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg">
+</div>
+<span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-emerald-400 block mb-1">Rugged Outdoor</span>
+<h3 class="font-display font-black text-lg sm:text-2xl mb-2 text-white">Apex Watch Ultra 2 Titanium</h3>
+<p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+              3000-nit sapphire crystal AMOLED display with dual-band L1+L5 GPS, ECG sensor, and 72-hour multi-day expedition battery life.
+            </p>
+<div class="flex flex-wrap gap-1.5 mb-4">
+<span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 text-[10px] sm:text-xs font-bold">100m Water Resist</span>
+<span class="px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300 text-[10px] sm:text-xs font-bold">Dual-Band GPS</span>
+<span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 text-[10px] sm:text-xs font-bold">72-Hr Battery</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-white/10">
+<div>
+<span class="font-display font-black text-xl sm:text-2xl text-white">₹24,999</span>
+<span class="text-xs text-slate-400 line-through ml-2">₹34,900</span>
+</div>
+<button class="spotlight-add-btn px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 text-slate-950 font-black text-xs uppercase tracking-wider active:scale-95 transition-all" data-product-id="smart-watch-ultra">
+                + Add to Cart
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- COMPLETE MARKETPLACE CATALOG WITH SORTING & FILTERS -->
+<section class="max-w-[1440px] mx-auto px-3.5 sm:px-8 py-8 sm:py-16" id="marketplace-catalog">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">Verified Stock</span>
+<span class="text-xs font-bold text-slate-500" id="results-count-badge">Showing 10 products</span>
+</div>
+<h2 class="font-display font-black text-2xl sm:text-3xl text-slate-900">
+          Recommended For You
+        </h2>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-2">
+<select aria-label="Sort products" class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" id="sort-select">
+<option value="featured">Sort by: Featured</option>
+<option value="price-low">Price: Low to High</option>
+<option value="price-high">Price: High to Low</option>
+<option value="rating">Top Rated</option>
+</select>
+<button class="px-3 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold transition-all active:scale-95" id="reset-filters-btn">
+          Reset
+        </button>
+</div>
+</div>
+<!-- 2 Cols on mobile, 4 on tablet, 5 on desktop -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-5 border-b border-slate-200/80"><span class="text-xs font-bold text-slate-500 whitespace-nowrap flex items-center gap-1 mr-1"><svg class="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>Filter by Rating:</span><button class="star-filter-chip whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-900 text-white shadow-sm" data-star-threshold="0">All Ratings</button><button class="star-filter-chip whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white border border-slate-200 hover:border-amber-400 text-slate-700 shadow-sm flex items-center gap-1" data-star-threshold="4.8"><span class="text-amber-500">★★★★★</span><span>4.8★ &amp; Above</span></button><button class="star-filter-chip whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white border border-slate-200 hover:border-amber-400 text-slate-700 shadow-sm flex items-center gap-1" data-star-threshold="4.5"><span class="text-amber-500">★★★★☆</span><span>4.5★ &amp; Above</span></button><button class="star-filter-chip whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white border border-slate-200 hover:border-amber-400 text-slate-700 shadow-sm flex items-center gap-1" data-star-threshold="4.0"><span class="text-amber-500">★★★★☆</span><span>4.0★ &amp; Above</span></button><button class="star-filter-chip whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-bold transition-all bg-white border border-slate-200 hover:border-amber-400 text-slate-700 shadow-sm flex items-center gap-1" data-star-threshold="4.9"><span class="text-amber-500">★★★★★</span><span class="px-1.5 py-0.2 rounded bg-amber-100 text-amber-900 text-[10px] font-black">Top Pick 4.9★</span></button></div><div class="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-5" id="marketplace-grid">
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              42% OFF
+            </span>
+            <button onclick="toggleWishlist('anc-headphones', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-pink-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Sony WH-1000XM6 ANC" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('anc-headphones')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Electronics</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('anc-headphones')">
+              Sony WH-1000XM6 ANC
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.9</span>
+              <span class="text-slate-400">(2480)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹18,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹32,990</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('anc-headphones')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('anc-headphones')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              30% OFF
+            </span>
+            <button onclick="toggleWishlist('rgb-keyboard', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Keychron Q1 Pro Mechanical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('rgb-keyboard')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Gaming</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('rgb-keyboard')">
+              Keychron Q1 Pro Mechanical
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.8</span>
+              <span class="text-slate-400">(940)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹12,499</span>
+              <span class="text-[10px] text-slate-400 line-through">₹17,999</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('rgb-keyboard')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('rgb-keyboard')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              28% OFF
+            </span>
+            <button onclick="toggleWishlist('smart-watch-ultra', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Apex Watch Ultra 2 Titanium" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('smart-watch-ultra')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Electronics</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('smart-watch-ultra')">
+              Apex Watch Ultra 2 Titanium
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.9</span>
+              <span class="text-slate-400">(1620)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹24,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹34,900</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('smart-watch-ultra')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('smart-watch-ultra')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              31% OFF
+            </span>
+            <button onclick="toggleWishlist('dunk-sneakers', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-pink-500 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Nike Dunk Low Retro Panda" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('dunk-sneakers')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Fashion</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('dunk-sneakers')">
+              Nike Dunk Low Retro Panda
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.7</span>
+              <span class="text-slate-400">(3120)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹8,295</span>
+              <span class="text-[10px] text-slate-400 line-through">₹11,995</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('dunk-sneakers')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('dunk-sneakers')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              39% OFF
+            </span>
+            <button onclick="toggleWishlist('gaming-mouse', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Razer DeathAdder V3 Ultra" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('gaming-mouse')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Gaming</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('gaming-mouse')">
+              Razer DeathAdder V3 Ultra
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.8</span>
+              <span class="text-slate-400">(890)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹5,499</span>
+              <span class="text-[10px] text-slate-400 line-through">₹8,999</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('gaming-mouse')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('gaming-mouse')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              30% OFF
+            </span>
+            <button onclick="toggleWishlist('smart-speaker', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Echo Dot 5th Gen with Clock" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('smart-speaker')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Home</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('smart-speaker')">
+              Echo Dot 5th Gen with Clock
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.6</span>
+              <span class="text-slate-400">(4320)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹4,499</span>
+              <span class="text-[10px] text-slate-400 line-through">₹6,499</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('smart-speaker')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('smart-speaker')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              28% OFF
+            </span>
+            <button onclick="toggleWishlist('espresso-machine', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Breville Barista Touch Pro" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('espresso-machine')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Home</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('espresso-machine')">
+              Breville Barista Touch Pro
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.9</span>
+              <span class="text-slate-400">(580)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹42,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹59,990</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('espresso-machine')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('espresso-machine')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              46% OFF
+            </span>
+            <button onclick="toggleWishlist('leather-jacket', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Vintage Minimalist Biker Jacket" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('leather-jacket')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Fashion</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('leather-jacket')">
+              Vintage Minimalist Biker Jacket
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.7</span>
+              <span class="text-slate-400">(740)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹6,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹12,999</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('leather-jacket')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('leather-jacket')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              18% OFF
+            </span>
+            <button onclick="toggleWishlist('mirrorless-camera', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Sony Alpha A7 IV Full-Frame" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('mirrorless-camera')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Electronics</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('mirrorless-camera')">
+              Sony Alpha A7 IV Full-Frame
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.9</span>
+              <span class="text-slate-400">(410)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹1,98,990</span>
+              <span class="text-[10px] text-slate-400 line-through">₹2,42,990</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('mirrorless-camera')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('mirrorless-camera')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              26% OFF
+            </span>
+            <button onclick="toggleWishlist('desk-lamp-rgb', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+            </button>
+            <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="BenQ ScreenBar Halo Light" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('desk-lamp-rgb')">
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">Home</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('desk-lamp-rgb')">
+              BenQ ScreenBar Halo Light
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ 4.8</span>
+              <span class="text-slate-400">(620)</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹13,999</span>
+              <span class="text-[10px] text-slate-400 line-through">₹18,999</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('desk-lamp-rgb')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('desk-lamp-rgb')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      </div>
+</section><section class="bg-white border-t border-b border-slate-200/80 py-12 sm:py-16" id="customer-reviews-section"><div class="max-w-[1440px] mx-auto px-3.5 sm:px-8"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-100"><div><div class="flex items-center gap-2 mb-1.5"><span class="px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] sm:text-xs font-black uppercase tracking-wider">✓ Prime Verified Transparency</span><span class="text-xs font-bold text-slate-400">14,280+ Global Ratings</span></div><h2 class="font-display font-black text-2xl sm:text-3xl text-slate-900">Customer Voice &amp; Verified Ratings</h2></div><div class="flex items-center gap-3"><button onclick="openWriteReviewModal()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-bold text-xs uppercase tracking-wider shadow-sm active:scale-95 transition-all flex items-center gap-1.5"><span>✍️</span><span>Write a Review</span></button></div></div><div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10"><div class="lg:col-span-4 bg-slate-50 border border-slate-200/80 rounded-3xl p-6 sm:p-7 flex flex-col justify-between shadow-sm"><div class="text-center sm:text-left mb-6"><span class="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1">Marketplace Aggregate</span><div class="flex items-baseline justify-center sm:justify-start gap-2"><span class="font-display font-black text-5xl sm:text-6xl text-slate-900">4.8</span><span class="text-sm text-slate-400 font-bold">/ 5.0</span></div><div class="flex items-center justify-center sm:justify-start gap-1 text-amber-500 text-lg my-1.5">★★★★★</div><p class="text-xs text-slate-500 font-medium">94% of Sandy Mart shoppers recommend our products &amp; same-day Prime delivery.</p></div><div class="space-y-2.5"><div class="flex items-center gap-3 text-xs"><span class="w-7 font-bold text-slate-700">5★</span><div class="flex-1 h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width: 78%"></div></div><span class="w-9 text-right font-bold text-slate-500">78%</span></div><div class="flex items-center gap-3 text-xs"><span class="w-7 font-bold text-slate-700">4★</span><div class="flex-1 h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width: 15%"></div></div><span class="w-9 text-right font-bold text-slate-500">15%</span></div><div class="flex items-center gap-3 text-xs"><span class="w-7 font-bold text-slate-700">3★</span><div class="flex-1 h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width: 4%"></div></div><span class="w-9 text-right font-bold text-slate-500">4%</span></div><div class="flex items-center gap-3 text-xs"><span class="w-7 font-bold text-slate-700">2★</span><div class="flex-1 h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width: 2%"></div></div><span class="w-9 text-right font-bold text-slate-500">2%</span></div><div class="flex items-center gap-3 text-xs"><span class="w-7 font-bold text-slate-700">1★</span><div class="flex-1 h-2 rounded-full bg-slate-200 overflow-hidden"><div class="h-full bg-slate-300 rounded-full" style="width: 1%"></div></div><span class="w-9 text-right font-bold text-slate-500">1%</span></div></div></div><div class="lg:col-span-8 space-y-4"><div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 text-xs font-bold"><button class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-slate-900 text-white shadow-sm">All Reviews (1,240)</button><button class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">✓ Verified Purchases Only</button><button class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors flex items-center gap-1.5"><span>📷</span><span>With Photos (342)</span></button><button class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">🎧 Audio Quality</button><button class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">⚡ Battery Life</button></div><div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="reviews-cards-container"><div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-sm"><div class="space-y-2 mb-3"><div class="flex items-start justify-between"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-full bg-gradient-to-tr from-[#FF9900] to-[#EC4899] text-white font-bold text-xs flex items-center justify-center shadow-sm">RK</div><div><h4 class="font-display font-bold text-xs text-slate-900">Rahul K.</h4><span class="text-[10px] text-slate-400 font-medium">Madurai • Verified Prime Buyer</span></div></div><div class="flex items-center text-amber-500 text-xs font-bold">★★★★★</div></div><div class="inline-block px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold text-[10px]">Purchased: Sony WH-1000XM6 ANC</div><p class="text-xs text-slate-600 leading-relaxed font-normal">The noise cancellation on the XM6 is magical in Madurai traffic! ANC cuts the bus engine rumble entirely. Delivered in under 18 hours with Prime.</p><div class="flex items-center gap-2 pt-1"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Buyer photo" class="w-12 h-12 rounded-lg object-cover border border-slate-200"><img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Buyer unboxing photo" class="w-12 h-12 rounded-lg object-cover border border-slate-200"></div></div><div class="flex items-center justify-between pt-2 border-t border-slate-200/70 text-[11px] text-slate-500"><span>2 days ago</span><button onclick="incrementHelpful(this)" class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-slate-300 font-bold text-slate-700 active:scale-95 transition-all flex items-center gap-1"><span>👍 Helpful</span><span class="helpful-count">(42)</span></button></div></div><div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-sm"><div class="space-y-2 mb-3"><div class="flex items-start justify-between"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-full bg-gradient-to-tr from-violet-600 to-indigo-600 text-white font-bold text-xs flex items-center justify-center shadow-sm">AP</div><div><h4 class="font-display font-bold text-xs text-slate-900">Ananya P.</h4><span class="text-[10px] text-slate-400 font-medium">Bengaluru • Verified Prime Buyer</span></div></div><div class="flex items-center text-amber-500 text-xs font-bold">★★★★★</div></div><div class="inline-block px-2 py-0.5 rounded bg-violet-50 text-violet-700 font-bold text-[10px]">Purchased: Keychron Q1 Pro RGB</div><p class="text-xs text-slate-600 leading-relaxed font-normal">The double gasket typing sound is super thocky and pure acoustic bliss! Heavy aluminium chassis feels ultra premium. Genuine Sandy Mart stock.</p><div class="flex items-center gap-2 pt-1"><img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&amp;fit=crop&amp;w=150&amp;q=80" alt="Keychron setup" class="w-12 h-12 rounded-lg object-cover border border-slate-200"></div></div><div class="flex items-center justify-between pt-2 border-t border-slate-200/70 text-[11px] text-slate-500"><span>1 week ago</span><button onclick="incrementHelpful(this)" class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-slate-300 font-bold text-slate-700 active:scale-95 transition-all flex items-center gap-1"><span>👍 Helpful</span><span class="helpful-count">(29)</span></button></div></div><div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-sm"><div class="space-y-2 mb-3"><div class="flex items-start justify-between"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 text-white font-bold text-xs flex items-center justify-center shadow-sm">VS</div><div><h4 class="font-display font-bold text-xs text-slate-900">Vikram S.</h4><span class="text-[10px] text-slate-400 font-medium">Chennai • Verified Prime Buyer</span></div></div><div class="flex items-center text-amber-500 text-xs font-bold">★★★★★</div></div><div class="inline-block px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 font-bold text-[10px]">Purchased: Apex Watch Ultra 2 Titanium</div><p class="text-xs text-slate-600 leading-relaxed font-normal">The 3000-nit display is crystal clear even under intense midday Chennai sunshine. L1+L5 GPS track is surgical for morning beach marathons.</p></div><div class="flex items-center justify-between pt-2 border-t border-slate-200/70 text-[11px] text-slate-500"><span>2 weeks ago</span><button onclick="incrementHelpful(this)" class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-slate-300 font-bold text-slate-700 active:scale-95 transition-all flex items-center gap-1"><span>👍 Helpful</span><span class="helpful-count">(18)</span></button></div></div><div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-sm"><div class="space-y-2 mb-3"><div class="flex items-start justify-between"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-500 to-rose-600 text-white font-bold text-xs flex items-center justify-center shadow-sm">DR</div><div><h4 class="font-display font-bold text-xs text-slate-900">Divya R.</h4><span class="text-[10px] text-slate-400 font-medium">Coimbatore • Verified Prime Buyer</span></div></div><div class="flex items-center text-amber-500 text-xs font-bold">★★★★☆</div></div><div class="inline-block px-2 py-0.5 rounded bg-amber-50 text-amber-800 font-bold text-[10px]">Purchased: Nike Dunk Low Retro Panda</div><p class="text-xs text-slate-600 leading-relaxed font-normal">100% authentic Dunks with Sandy Mart verified security tag. Clean packaging, comfy soles, looks top tier with cargos and oversized tees.</p></div><div class="flex items-center justify-between pt-2 border-t border-slate-200/70 text-[11px] text-slate-500"><span>3 weeks ago</span><button onclick="incrementHelpful(this)" class="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-slate-300 font-bold text-slate-700 active:scale-95 transition-all flex items-center gap-1"><span>👍 Helpful</span><span class="helpful-count">(35)</span></button></div></div></div></div></div></div></section><div aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center p-4" id="write-review-modal" role="dialog"><div class="absolute inset-0 bg-slate-950/75 backdrop-blur-sm" onclick="closeWriteReviewModal()"></div><div class="relative z-10 bg-white rounded-3xl w-full max-w-md p-6 shadow-2xl border border-slate-100 animate-toast"><div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100"><h3 class="font-display font-black text-lg text-slate-900">Write a Product Review</h3><button onclick="closeWriteReviewModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 flex items-center justify-center">✕</button></div><form class="space-y-3" onsubmit="submitReview(event)"><div><label class="block text-xs font-bold text-slate-700 mb-1">Select Product</label><select class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" id="review-product-select"><option value="Sony WH-1000XM6 ANC">Sony WH-1000XM6 ANC Headphones</option><option value="Keychron Q1 Pro RGB">Keychron Q1 Pro RGB Mechanical</option><option value="Apex Watch Ultra 2 Titanium">Apex Watch Ultra 2 Titanium</option><option value="Nike Dunk Low Retro Panda">Nike Dunk Low Retro Panda</option><option value="Razer DeathAdder V3 Ultra">Razer DeathAdder V3 Ultra</option></select></div><div><label class="block text-xs font-bold text-slate-700 mb-1">Your Rating</label><div class="flex items-center gap-2" id="review-stars-picker"><button type="button" onclick="setPickerStar(1)" class="text-2xl text-amber-500 hover:scale-110 transition-transform">★</button><button type="button" onclick="setPickerStar(2)" class="text-2xl text-amber-500 hover:scale-110 transition-transform">★</button><button type="button" onclick="setPickerStar(3)" class="text-2xl text-amber-500 hover:scale-110 transition-transform">★</button><button type="button" onclick="setPickerStar(4)" class="text-2xl text-amber-500 hover:scale-110 transition-transform">★</button><button type="button" onclick="setPickerStar(5)" class="text-2xl text-amber-500 hover:scale-110 transition-transform">★</button><span class="text-xs font-bold text-slate-500 ml-2" id="star-score-label">5.0 / 5</span></div></div><div class="grid grid-cols-2 gap-2"><div><label class="block text-xs font-bold text-slate-700 mb-1">Full Name</label><input type="text" required="" placeholder="e.g. Sandy K." class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" id="review-name-input"></div><div><label class="block text-xs font-bold text-slate-700 mb-1">City</label><input type="text" required="" placeholder="e.g. Madurai" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" id="review-city-input"></div></div><div><label class="block text-xs font-bold text-slate-700 mb-1">Your Honest Review</label><textarea required="" rows="3" placeholder="Describe the build, sound, dispatch speed and performance..." class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" id="review-body-input"></textarea></div><button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-[#FF9900] via-[#F97316] to-[#EC4899] text-white font-black text-xs uppercase tracking-wider active:scale-95 shadow-md hover:brightness-105 transition-all">Submit Verified Review</button></form></div></div>
+<!-- VIBRANT MODERN FOOTER -->
+<footer class="bg-slate-950 text-slate-300 pt-12 pb-8 border-t border-slate-800">
+<div class="max-w-[1440px] mx-auto px-4 sm:px-8">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-slate-800 text-xs sm:text-sm">
+<div class="md:col-span-5 space-y-3">
+<span class="font-display font-black text-2xl text-white">
+            Sandy<span class="text-[#FF9900]">Mart</span>
+</span>
+<p class="text-slate-400 max-w-sm leading-relaxed text-xs">
+            Next-generation hyper-vibrant marketplace with guaranteed Prime 24-hour dispatch across 19,000+ pin codes.
+          </p>
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs text-emerald-400 font-semibold">
+<span>Promo Code:</span>
+<strong class="text-white">SANDY10</strong>
+<span>for instant 10% off</span>
+</div>
+</div>
+<div class="md:col-span-3 space-y-2">
+<h4 class="font-display font-bold text-white uppercase text-xs tracking-wider mb-2">Departments</h4>
+<button class="block hover:text-[#FF9900] transition-colors" data-cat-jump="Electronics">Electronics &amp; Audio</button>
+<button class="block hover:text-[#FF9900] transition-colors" data-cat-jump="Fashion">Streetwear &amp; Sneakers</button>
+<button class="block hover:text-[#FF9900] transition-colors" data-cat-jump="Gaming">Pro Gaming &amp; Rigs</button>
+<button class="block hover:text-[#FF9900] transition-colors" data-cat-jump="Home">Smart Home &amp; Living</button>
+</div>
+<div class="md:col-span-4 space-y-2">
+<h4 class="font-display font-bold text-white uppercase text-xs tracking-wider mb-2">Sandy Prime Support</h4>
+<p class="text-slate-400 text-xs leading-relaxed">
+            Delivering across Madurai, Chennai, Bengaluru, Mumbai &amp; Delhi NCR with 7-day hassle-free doorstep replacement guarantee.
+          </p>
+<a class="inline-block mt-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition-all" href="#">
+            Back to Top ↑
+          </a>
+</div>
+</div>
+<div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+<span>© 2026 Sandy Mart Marketplace Pvt. Ltd. All rights reserved.</span>
+<span>Secure UPI, RuPay, Visa, Mastercard &amp; NetBanking Verified</span>
+</div>
+</div>
+</footer>
+<!-- MOBILE FIXED BOTTOM NAVIGATION BAR (App-like UX) -->
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-lg border-t border-slate-800 text-white px-2 py-1.5 flex items-center justify-around pb-safe">
+<button class="flex flex-col items-center justify-center p-1 text-[#FF9900] active:scale-95 transition-transform" id="mb-nav-home">
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+</svg>
+<span class="text-[10px] font-bold mt-0.5">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center p-1 text-slate-400 hover:text-white active:scale-95 transition-transform" id="mb-nav-deals">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[10px] font-semibold mt-0.5">Deals</span>
+</button>
+<button class="flex flex-col items-center justify-center p-1 text-slate-400 hover:text-white active:scale-95 transition-transform" id="mb-nav-search">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="text-[10px] font-semibold mt-0.5">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center p-1 text-slate-400 hover:text-white active:scale-95 transition-transform relative" id="mb-nav-wishlist">
+<svg class="w-5 h-5 text-pink-400" fill="currentColor" viewBox="0 0 20 20">
+<path clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-[10px] font-semibold mt-0.5">Saved</span>
+</button>
+<button class="flex flex-col items-center justify-center p-1 text-slate-400 hover:text-white active:scale-95 transition-transform relative" id="mb-nav-cart">
+<div class="relative">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute -top-1.5 -right-2 w-4 h-4 rounded-full bg-[#FF9900] text-slate-950 text-[10px] font-black flex items-center justify-center" id="mb-cart-badge">2</span>
+</div>
+<span class="text-[10px] font-bold text-white mt-0.5">Cart</span>
+</button>
+</nav>
+<!-- QUICK VIEW MODAL (Responsive Bottom-Sheet on Mobile -> Centered Dialog on Desktop) -->
+<div aria-modal="true" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4" id="quickview-modal" role="dialog">
+<div class="absolute inset-0 bg-slate-950/75 backdrop-blur-sm transition-opacity" id="qv-backdrop"></div>
+<div class="relative z-10 bg-white rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col sm:grid sm:grid-cols-12 pb-safe animate-toast">
+<!-- Mobile Pull handle -->
+<div class="sm:hidden w-12 h-1.5 rounded-full bg-slate-300 mx-auto my-2.5"></div>
+<!-- Close Button -->
+<button aria-label="Close" class="absolute top-3 right-3 z-20 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-900 hover:text-white flex items-center justify-center font-bold transition-colors" id="qv-close-btn">
+        ✕
+      </button>
+<div class="sm:col-span-6 bg-slate-100 h-56 sm:h-auto relative overflow-hidden">
+<img alt="Product" class="w-full h-full object-cover" id="qv-img" src="">
+</div>
+<div class="sm:col-span-6 p-4 sm:p-6 flex flex-col justify-between">
+<div>
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase mb-2" id="qv-badge">
+            Prime Pick
+          </span>
+<h3 class="font-display font-black text-lg sm:text-xl text-slate-900 mb-1" id="qv-title">Product Title</h3>
+<div class="flex items-center gap-1.5 text-xs text-amber-500 font-bold mb-2">
+<span id="qv-stars">★★★★★</span>
+<span class="text-slate-400 font-normal" id="qv-reviews">(1,240 ratings)</span>
+</div>
+<div class="flex items-baseline gap-2 mb-3">
+<span class="font-display font-black text-2xl text-slate-900" id="qv-price">₹0</span>
+<span class="text-xs text-slate-400 line-through" id="qv-mrp">₹0</span>
+<span class="text-xs font-black text-emerald-600" id="qv-discount">40% OFF</span>
+</div>
+<p class="text-xs text-slate-600 leading-relaxed mb-4" id="qv-desc">
+            Product details description
+          </p>
+<div class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-[11px] text-emerald-800 font-bold flex items-center gap-2">
+<span class="text-base">⚡</span>
+<span>Free Same-Day Prime Delivery to Madurai 625001</span>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-100">
+<button class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-xs uppercase tracking-wider active:scale-95 shadow-md hover:brightness-105 transition-all" id="qv-add-cart-btn">
+            Add to Cart • Instant Checkout
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- SLIDE-OUT CART DRAWER -->
+<div aria-hidden="true" class="fixed inset-0 z-50 pointer-events-none" id="cart-drawer-wrapper">
+<div class="absolute inset-0 bg-slate-950/65 backdrop-blur-xs opacity-0 transition-opacity duration-300" id="cart-backdrop"></div>
+<aside class="absolute top-0 right-0 bottom-0 w-full max-w-md bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out pb-safe" id="cart-drawer">
+<!-- Drawer Header -->
+<div class="px-4 py-3.5 bg-gradient-to-r from-slate-950 to-[#1D4ED8] text-white flex items-center justify-between">
+<div>
+<h3 class="font-display font-black text-lg">Sandy Mart Cart</h3>
+<p class="text-xs text-blue-200" id="drawer-count-label">2 items ready for dispatch</p>
+</div>
+<button aria-label="Close cart" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center font-bold text-white transition-all" id="close-cart-btn">
+          ✕
+        </button>
+</div>
+<!-- Prime Free Delivery Target Indicator -->
+<div class="px-4 py-2.5 bg-emerald-50 border-b border-emerald-100">
+<p class="text-xs font-bold text-emerald-800 mb-1" id="free-delivery-text">🎉 Free Prime Express Delivery Unlocked!</p>
+<div class="w-full h-1.5 rounded-full bg-emerald-200 overflow-hidden">
+<div class="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300" id="free-delivery-bar" style="width: 100%"></div>
+</div>
+</div>
+<!-- Scrollable Cart Items -->
+<div class="flex-1 overflow-y-auto px-4 py-3 space-y-3" id="cart-items-list">
+          <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Sony WH-1000XM6 ANC" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
+            <div class="flex-1 min-w-0">
+              <h5 class="font-display font-bold text-xs text-slate-900 truncate">Sony WH-1000XM6 ANC</h5>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="font-bold text-xs text-slate-900">₹18,999</span>
+                <span class="text-[10px] text-slate-400 line-through">₹32,990</span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateQuantity('anc-headphones', -1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 font-bold text-xs flex items-center justify-center">-</button>
+                <span class="text-xs font-bold">1</span>
+                <button onclick="updateQuantity('anc-headphones', 1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 font-bold text-xs flex items-center justify-center">+</button>
+                <button onclick="removeFromCart('anc-headphones')" class="text-[10px] text-red-500 hover:underline ml-auto font-bold">Remove</button>
+              </div>
+            </div>
+          </div>
+        
+          <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+            <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&amp;fit=crop&amp;w=700&amp;q=80" alt="Keychron Q1 Pro Mechanical" class="w-14 h-14 rounded-lg object-cover flex-shrink-0">
+            <div class="flex-1 min-w-0">
+              <h5 class="font-display font-bold text-xs text-slate-900 truncate">Keychron Q1 Pro Mechanical</h5>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="font-bold text-xs text-slate-900">₹12,499</span>
+                <span class="text-[10px] text-slate-400 line-through">₹17,999</span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateQuantity('rgb-keyboard', -1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 font-bold text-xs flex items-center justify-center">-</button>
+                <span class="text-xs font-bold">1</span>
+                <button onclick="updateQuantity('rgb-keyboard', 1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 font-bold text-xs flex items-center justify-center">+</button>
+                <button onclick="removeFromCart('rgb-keyboard')" class="text-[10px] text-red-500 hover:underline ml-auto font-bold">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- Promo Code & Price Calculation -->
+<div class="p-4 bg-slate-50 border-t border-slate-200 space-y-3">
+<!-- Promo Form -->
+<form class="flex gap-2" id="promo-form">
+<input class="flex-1 min-w-0 px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs font-bold uppercase tracking-wider text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500" id="promo-input" placeholder="Promo code (SANDY10)" type="text">
+<button class="px-4 py-2 rounded-xl bg-slate-950 text-white hover:bg-blue-600 text-xs font-bold uppercase tracking-wider active:scale-95 transition-all" type="submit">
+            Apply
+          </button>
+</form>
+<p class="hidden text-xs font-bold text-emerald-600" id="promo-feedback"></p>
+<!-- Price breakdown -->
+<div class="space-y-1.5 text-xs border-t border-slate-200 pt-2.5">
+<div class="flex justify-between text-slate-600">
+<span>Subtotal</span>
+<span class="font-bold text-slate-900" id="cart-raw-subtotal">₹31,498</span>
+</div>
+<div class="hidden justify-between text-emerald-600 font-bold" id="discount-row">
+<span>Promo Discount (SANDY10)</span>
+<span id="cart-discount-amount">-₹0</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Prime Shipping</span>
+<span class="font-bold text-emerald-600" id="cart-delivery-fee">FREE</span>
+</div>
+<div class="flex justify-between text-base font-display font-black text-slate-900 pt-2 border-t border-slate-200">
+<span>Order Total</span>
+<span class="text-gradient-sandy" id="cart-final-total">₹31,498</span>
+</div>
+</div>
+<button class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-[#FF9900] via-[#F97316] to-[#EC4899] hover:brightness-105 active:scale-95 text-white font-display font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-orange-500/25 transition-all" id="place-order-btn">
+          Proceed to Buy • Instant UPI
+        </button>
+</div>
+</aside>
+</div>
+<!-- ORDER SUCCESS RECEIPT POPUP -->
+<div aria-modal="true" class="fixed inset-0 z-50 hidden items-center justify-center p-4" id="order-receipt-modal" role="dialog">
+<div class="absolute inset-0 bg-slate-950/75 backdrop-blur-sm"></div>
+<div class="relative z-10 bg-white rounded-3xl w-full max-w-sm p-6 text-center shadow-2xl border border-slate-100 animate-toast">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-600 text-white text-3xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/30">
+        ✓
+      </div>
+<h3 class="font-display font-black text-2xl text-slate-900 mb-1">Order Placed!</h3>
+<p class="text-xs text-slate-600 mb-4">
+        Thank you for shopping at Sandy Mart! Your Prime package is being packed for instant dispatch.
+      </p>
+<div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-xs text-left space-y-1 mb-5">
+<div class="flex justify-between text-slate-600">
+<span>Order ID:</span>
+<span class="font-mono font-bold text-slate-900" id="receipt-order-id">#SM-84920</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Delivery City:</span>
+<span class="font-bold text-slate-900" id="receipt-city">Madurai 625001</span>
+</div>
+<div class="flex justify-between text-slate-600">
+<span>Payment:</span>
+<span class="font-bold text-emerald-600">UPI Instant Verified</span>
+</div>
+</div>
+<button class="w-full py-3 rounded-xl bg-slate-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-slate-800 active:scale-95 transition-all" id="close-receipt-btn">
+        Continue Shopping
+      </button>
+</div>
+</div>
+<!-- FLOATING INTERACTION TOAST NOTIFICATION -->
+<div class="fixed bottom-20 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-50 pointer-events-none hidden items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-slate-950 text-white text-xs font-bold shadow-2xl border border-white/20" id="interaction-toast">
+<span id="toast-icon">🛍️</span>
+<span id="toast-message">Added to cart</span>
+</div>
+<!-- SCRIPT: APPLICATION LOGIC & DYNAMIC DATA -->
+<script>
+    // Product Catalog Database
+    const PRODUCTS = [
+      {
+        id: "anc-headphones",
+        title: "Sony WH-1000XM6 ANC",
+        category: "Electronics",
+        price: 18999,
+        mrp: 32990,
+        discount: "42% OFF",
+        rating: 4.9,
+        reviews: 2480,
+        badge: "Prime Mega Deal",
+        isLightning: true,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80",
+        description: "Dual QN3 active noise-cancelling studio headphones with 40-hr battery life, multipoint Bluetooth 5.4, and LDAC audio codec."
+      },
+      {
+        id: "rgb-keyboard",
+        title: "Keychron Q1 Pro Mechanical",
+        category: "Gaming",
+        price: 12499,
+        mrp: 17999,
+        discount: "30% OFF",
+        rating: 4.8,
+        reviews: 940,
+        badge: "Esports Edition",
+        isLightning: true,
+        image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=700&q=80",
+        description: "Double gasket mount CNC aluminum keyboard with hot-swappable tactile switches and per-key 16.8M RGB."
+      },
+      {
+        id: "smart-watch-ultra",
+        title: "Apex Watch Ultra 2 Titanium",
+        category: "Electronics",
+        price: 24999,
+        mrp: 34900,
+        discount: "28% OFF",
+        rating: 4.9,
+        reviews: 1620,
+        badge: "Grade-5 Titanium",
+        isLightning: true,
+        image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=700&q=80",
+        description: "3000-nit sapphire crystal display, dual-frequency GPS, ECG monitor, and 72-hour extended endurance."
+      },
+      {
+        id: "dunk-sneakers",
+        title: "Nike Dunk Low Retro Panda",
+        category: "Fashion",
+        price: 8295,
+        mrp: 11995,
+        discount: "31% OFF",
+        rating: 4.7,
+        reviews: 3120,
+        badge: "Top Streetwear",
+        isLightning: true,
+        image: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=700&q=80",
+        description: "Iconic two-tone monochrome leather upper with foam cushioning for street style and all-day comfort."
+      },
+      {
+        id: "gaming-mouse",
+        title: "Razer DeathAdder V3 Ultra",
+        category: "Gaming",
+        price: 5499,
+        mrp: 8999,
+        discount: "39% OFF",
+        rating: 4.8,
+        reviews: 890,
+        badge: "Fast 8K Polling",
+        isLightning: false,
+        image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=700&q=80",
+        description: "Ultra-lightweight 59g ergonomic design with Focus Pro 30K optical sensor and optical mouse switches gen 3."
+      },
+      {
+        id: "smart-speaker",
+        title: "Echo Dot 5th Gen with Clock",
+        category: "Home",
+        price: 4499,
+        mrp: 6499,
+        discount: "30% OFF",
+        rating: 4.6,
+        reviews: 4320,
+        badge: "Prime Favorite",
+        isLightning: false,
+        image: "https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&w=700&q=80",
+        description: "Deep bass, clear vocals, LED clock display, and Alexa smart home voice control hub."
+      },
+      {
+        id: "espresso-machine",
+        title: "Breville Barista Touch Pro",
+        category: "Home",
+        price: 42999,
+        mrp: 59990,
+        discount: "28% OFF",
+        rating: 4.9,
+        reviews: 580,
+        badge: "Artisan Coffee",
+        isLightning: false,
+        image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=700&q=80",
+        description: "ThermoJet 3-second heating system, integrated conical burr grinder, and automated microfoam milk texturing."
+      },
+      {
+        id: "leather-jacket",
+        title: "Vintage Minimalist Biker Jacket",
+        category: "Fashion",
+        price: 6999,
+        mrp: 12999,
+        discount: "46% OFF",
+        rating: 4.7,
+        reviews: 740,
+        badge: "Pure Leather",
+        isLightning: false,
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80",
+        description: "100% full-grain leather with tailored slim cut, heavy-duty YKK gunmetal hardware, and satin inner lining."
+      },
+      {
+        id: "mirrorless-camera",
+        title: "Sony Alpha A7 IV Full-Frame",
+        category: "Electronics",
+        price: 198990,
+        mrp: 242990,
+        discount: "18% OFF",
+        rating: 4.9,
+        reviews: 410,
+        badge: "Creator Pro",
+        isLightning: false,
+        image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&q=80",
+        description: "33MP Exmor R sensor, 4K 60p recording, real-time eye autofocus, and 10-bit 4:2:2 S-Cinetone colors."
+      },
+      {
+        id: "desk-lamp-rgb",
+        title: "BenQ ScreenBar Halo Light",
+        category: "Home",
+        price: 13999,
+        mrp: 18999,
+        discount: "26% OFF",
+        rating: 4.8,
+        reviews: 620,
+        badge: "Workstation",
+        isLightning: false,
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=700&q=80",
+        description: "Auto-dimming monitor light bar with wireless controller and rear ambient back-glow for eye fatigue protection."
+      }
+    ];
+
+    // State
+    let cart = [
+      { product: PRODUCTS[0], quantity: 1 },
+      { product: PRODUCTS[1], quantity: 1 }
+    ];
+    let wishlist = new Set(["anc-headphones", "dunk-sneakers"]);
+    let isPromoApplied = false;
+    let activeFilter = "all";
+    let activeSort = "featured";
+    let activeSlide = 0;
+
+    // Toast Notification helper
+    function showToast(message, icon = "🛍️") {
+      const toast = document.getElementById("interaction-toast");
+      const msgEl = document.getElementById("toast-message");
+      const iconEl = document.getElementById("toast-icon");
+      if (!toast) return;
+
+      iconEl.textContent = icon;
+      msgEl.textContent = message;
+      toast.classList.remove("hidden");
+      toast.classList.add("flex", "animate-toast");
+
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.add("hidden");
+        toast.classList.remove("flex", "animate-toast");
+      }, 2500);
+    }
+
+    // Scroll Progress Bar
+    window.addEventListener("scroll", () => {
+      const bar = document.getElementById("scroll-progress-bar");
+      if (!bar) return;
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = totalScroll / windowHeight;
+      bar.style.transform = `scaleX(${scrollPercent})`;
+    });
+
+    // Render Lightning Deals
+    function renderLightningDeals() {
+      const container = document.getElementById("lightning-grid");
+      if (!container) return;
+
+      const lightningItems = PRODUCTS.filter(p => p.isLightning);
+      container.innerHTML = lightningItems.map(p => `
+        <div class="group relative bg-white border border-slate-100 hover:border-[#FF9900]/40 rounded-2xl p-2.5 sm:p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2 sm:mb-3">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-[#FF9900] text-slate-950 text-[10px] font-black uppercase shadow">
+              ${p.discount}
+            </span>
+            <button onclick="toggleWishlist('${p.id}', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 ${wishlist.has(p.id) ? 'text-pink-500 fill-current' : 'text-slate-400'}" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('${p.id}')" />
+          </div>
+
+          <div>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1">
+              <span>★ ${p.rating}</span>
+              <span class="text-slate-400">(${p.reviews})</span>
+            </div>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1" onclick="openQuickView('${p.id}')">
+              ${p.title}
+            </h4>
+            <div class="flex items-baseline gap-1.5 mb-2.5">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="text-[10px] text-slate-400 line-through">₹${p.mrp.toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('${p.id}')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('${p.id}')" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#FF9900] to-[#F97316] text-slate-950 font-black text-[11px] uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all shadow-sm">
+              + Add
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render Full Catalog with Filtering and Sorting
+    function renderCatalog() {
+      const container = document.getElementById("marketplace-grid");
+      const badge = document.getElementById("results-count-badge");
+      if (!container) return;
+
+      let list = [...PRODUCTS];
+
+      // Filtering
+      if (activeFilter === "deals") {
+        list = list.filter(p => parseInt(p.discount) >= 30);
+      } else if (activeFilter === "lightning") {
+        list = list.filter(p => p.isLightning);
+      } else if (activeFilter === "bestsellers") {
+        list = list.filter(p => p.rating >= 4.8);
+      } else if (activeFilter !== "all") {
+        list = list.filter(p => p.category.toLowerCase() === activeFilter.toLowerCase());
+      }
+
+      // Search keyword filter
+      const searchInput = document.getElementById("search-input");
+      const query = (searchInput?.value || "").trim().toLowerCase();
+      if (query) {
+        list = list.filter(p => p.title.toLowerCase().includes(query) || p.category.toLowerCase().includes(query) || p.description.toLowerCase().includes(query));
+      }
+
+      // Sorting
+      if (activeSort === "price-low") {
+        list.sort((a, b) => a.price - b.price);
+      } else if (activeSort === "price-high") {
+        list.sort((a, b) => b.price - a.price);
+      } else if (activeSort === "rating") {
+        list.sort((a, b) => b.rating - a.rating);
+      }
+
+      badge.textContent = `Showing ${list.length} products`;
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-500">
+            <p class="text-3xl mb-2">🔍</p>
+            <p class="font-bold text-sm">No items found matching your filter</p>
+            <button onclick="resetFilters()" class="mt-3 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold">Reset Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(p => `
+        <div class="group bg-white border border-slate-100 hover:border-blue-500/30 rounded-2xl p-2.5 sm:p-3.5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div class="relative rounded-xl overflow-hidden aspect-square bg-slate-50 mb-2.5">
+            <span class="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-blue-600 text-white text-[10px] font-black uppercase">
+              ${p.discount}
+            </span>
+            <button onclick="toggleWishlist('${p.id}', event)" class="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/80 hover:bg-white text-slate-800 flex items-center justify-center shadow transition-colors" aria-label="Save">
+              <svg class="w-4 h-4 ${wishlist.has(p.id) ? 'text-pink-500 fill-current' : 'text-slate-400'}" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onclick="openQuickView('${p.id}')" />
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">${p.category}</span>
+            <h4 class="font-display font-bold text-xs sm:text-sm text-slate-900 truncate mb-1 cursor-pointer hover:text-blue-600" onclick="openQuickView('${p.id}')">
+              ${p.title}
+            </h4>
+            <div class="flex items-center gap-1 text-[10px] text-amber-500 font-bold mb-1.5">
+              <span>★ ${p.rating}</span>
+              <span class="text-slate-400">(${p.reviews})</span>
+            </div>
+            <div class="flex items-baseline gap-1.5 mb-3">
+              <span class="font-display font-black text-sm sm:text-base text-slate-900">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="text-[10px] text-slate-400 line-through">₹${p.mrp.toLocaleString('en-IN')}</span>
+            </div>
+          </div>
+
+          <div class="flex gap-1.5">
+            <button onclick="openQuickView('${p.id}')" class="flex-1 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-[11px] transition-colors">
+              Details
+            </button>
+            <button onclick="addToCart('${p.id}')" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-[#FF9900] hover:text-slate-950 text-white font-black text-[11px] uppercase tracking-wider active:scale-95 transition-all">
+              + Add
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Cart Management
+    function addToCart(productId) {
+      const prod = PRODUCTS.find(p => p.id === productId);
+      if (!prod) return;
+
+      const existing = cart.find(item => item.product.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ product: prod, quantity: 1 });
+      }
+
+      updateCartUI();
+      bounceCartBadge();
+      showToast(`${prod.title} added to Cart!`, "🛒");
+    }
+
+    function updateQuantity(productId, delta) {
+      const item = cart.find(i => i.product.id === productId);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => i.product.id !== productId);
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(i => i.product.id !== productId);
+      updateCartUI();
+      showToast("Item removed from Cart", "🗑️");
+    }
+
+    function bounceCartBadge() {
+      const badge = document.getElementById("header-cart-count");
+      const mbBadge = document.getElementById("mb-cart-badge");
+      [badge, mbBadge].forEach(el => {
+        if (el) {
+          el.classList.add("animate-cart-pop");
+          setTimeout(() => el.classList.remove("animate-cart-pop"), 500);
+        }
+      });
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+      
+      // Update badges
+      document.getElementById("header-cart-count").textContent = totalCount;
+      const mbBadge = document.getElementById("mb-cart-badge");
+      if (mbBadge) mbBadge.textContent = totalCount;
+      document.getElementById("drawer-count-label").textContent = `${totalCount} items ready for dispatch`;
+
+      // Render cart items
+      const cartList = document.getElementById("cart-items-list");
+      if (cart.length === 0) {
+        cartList.innerHTML = `
+          <div class="py-12 text-center text-slate-400">
+            <span class="text-4xl block mb-2">🛒</span>
+            <p class="font-bold text-sm text-slate-700">Your Sandy Mart cart is empty</p>
+            <p class="text-xs text-slate-400 mt-1">Explore lightning drops and deals above!</p>
+          </div>
+        `;
+      } else {
+        cartList.innerHTML = cart.map(item => `
+          <div class="flex items-center gap-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+            <img src="${item.product.image}" alt="${item.product.title}" class="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
+            <div class="flex-1 min-w-0">
+              <h5 class="font-display font-bold text-xs text-slate-900 truncate">${item.product.title}</h5>
+              <div class="flex items-baseline gap-1 mt-0.5">
+                <span class="font-bold text-xs text-slate-900">₹${item.product.price.toLocaleString('en-IN')}</span>
+                <span class="text-[10px] text-slate-400 line-through">₹${item.product.mrp.toLocaleString('en-IN')}</span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="updateQuantity('${item.product.id}', -1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 font-bold text-xs flex items-center justify-center">-</button>
+                <span class="text-xs font-bold">${item.quantity}</span>
+                <button onclick="updateQuantity('${item.product.id}', 1)" class="w-5 h-5 rounded bg-slate-200 hover:bg-slate-300 font-bold text-xs flex items-center justify-center">+</button>
+                <button onclick="removeFromCart('${item.product.id}')" class="text-[10px] text-red-500 hover:underline ml-auto font-bold">Remove</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Calculations
+      const subtotal = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
+      const discount = isPromoApplied ? Math.round(subtotal * 0.10) : 0;
+      const finalTotal = subtotal - discount;
+
+      document.getElementById("cart-raw-subtotal").textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+      document.getElementById("cart-final-total").textContent = `₹${finalTotal.toLocaleString('en-IN')}`;
+      
+      const discountRow = document.getElementById("discount-row");
+      const discountAmt = document.getElementById("cart-discount-amount");
+      if (isPromoApplied) {
+        discountRow.classList.remove("hidden");
+        discountRow.classList.add("flex");
+        discountAmt.textContent = `-₹${discount.toLocaleString('en-IN')}`;
+      } else {
+        discountRow.classList.add("hidden");
+        discountRow.classList.remove("flex");
+      }
+
+      // Free shipping bar (free over ₹999)
+      const freeBar = document.getElementById("free-delivery-bar");
+      const freeText = document.getElementById("free-delivery-text");
+      const threshold = 999;
+      if (subtotal >= threshold) {
+        freeBar.style.width = "100%";
+        freeText.textContent = "🎉 Free Prime Express Delivery Unlocked!";
+      } else {
+        const pct = Math.min(100, Math.round((subtotal / threshold) * 100));
+        freeBar.style.width = `${pct}%`;
+        freeText.textContent = `Add ₹${(threshold - subtotal).toLocaleString('en-IN')} more for FREE Prime Delivery!`;
+      }
+    }
+
+    // Wishlist Toggle
+    function toggleWishlist(productId, e) {
+      if (e) e.stopPropagation();
+      const badge = document.getElementById("wishlist-badge");
+      if (wishlist.has(productId)) {
+        wishlist.delete(productId);
+        showToast("Removed from Wishlist", "🤍");
+      } else {
+        wishlist.add(productId);
+        showToast("Saved to your Wishlist!", "💖");
+      }
+      if (badge) badge.textContent = wishlist.size;
+      renderLightningDeals();
+      renderCatalog();
+    }
+
+    // Drawer Open / Close
+    function openCart() {
+      const wrapper = document.getElementById("cart-drawer-wrapper");
+      const drawer = document.getElementById("cart-drawer");
+      const backdrop = document.getElementById("cart-backdrop");
+      wrapper.classList.remove("pointer-events-none");
+      backdrop.classList.add("opacity-100");
+      drawer.classList.remove("translate-x-full");
+    }
+
+    function closeCart() {
+      const wrapper = document.getElementById("cart-drawer-wrapper");
+      const drawer = document.getElementById("cart-drawer");
+      const backdrop = document.getElementById("cart-backdrop");
+      backdrop.classList.remove("opacity-100");
+      drawer.classList.add("translate-x-full");
+      setTimeout(() => wrapper.classList.add("pointer-events-none"), 300);
+    }
+
+    // Quick View Modal
+    function openQuickView(productId) {
+      const p = PRODUCTS.find(prod => prod.id === productId);
+      if (!p) return;
+
+      document.getElementById("qv-img").src = p.image;
+      document.getElementById("qv-title").textContent = p.title;
+      document.getElementById("qv-badge").textContent = p.badge;
+      document.getElementById("qv-stars").textContent = `★ ${p.rating}`;
+      document.getElementById("qv-reviews").textContent = `(${p.reviews} verified reviews)`;
+      document.getElementById("qv-price").textContent = `₹${p.price.toLocaleString('en-IN')}`;
+      document.getElementById("qv-mrp").textContent = `₹${p.mrp.toLocaleString('en-IN')}`;
+      document.getElementById("qv-discount").textContent = p.discount;
+      document.getElementById("qv-desc").textContent = p.description;
+
+      const addBtn = document.getElementById("qv-add-cart-btn");
+      addBtn.onclick = () => {
+        addToCart(p.id);
+        closeQuickView();
+      };
+
+      const modal = document.getElementById("quickview-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeQuickView() {
+      const modal = document.getElementById("quickview-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    // Reset Filters
+    function resetFilters() {
+      activeFilter = "all";
+      activeSort = "featured";
+      const searchInput = document.getElementById("search-input");
+      if (searchInput) searchInput.value = "";
+      document.querySelectorAll(".subnav-pill").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.navFilter === "all");
+        if (btn.dataset.navFilter === "all") {
+          btn.className = "subnav-pill active snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white text-slate-950 shadow-sm transition-all";
+        } else {
+          btn.className = "subnav-pill snap-start whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 transition-all";
+        }
+      });
+      renderCatalog();
+    }
+
+    // Setup Event Listeners
+    document.addEventListener("DOMContentLoaded", () => {
+      renderLightningDeals();
+      renderCatalog();
+      updateCartUI();
+
+      // Drawer trigger
+      document.getElementById("open-cart-btn")?.addEventListener("click", openCart);
+      document.getElementById("mb-nav-cart")?.addEventListener("click", openCart);
+      document.getElementById("close-cart-btn")?.addEventListener("click", closeCart);
+      document.getElementById("cart-backdrop")?.addEventListener("click", closeCart);
+
+      // Quick View Close
+      document.getElementById("qv-close-btn")?.addEventListener("click", closeQuickView);
+      document.getElementById("qv-backdrop")?.addEventListener("click", closeQuickView);
+
+      // Hero quick add
+      document.getElementById("hero-quick-add")?.addEventListener("click", () => {
+        addToCart("anc-headphones");
+      });
+
+      // Subnav pills filter
+      document.querySelectorAll(".subnav-pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".subnav-pill").forEach(b => {
+            b.classList.remove("active");
+            b.classList.remove("bg-white", "text-slate-950");
+            b.classList.add("bg-white/10", "text-slate-200");
+          });
+          btn.classList.add("active");
+          btn.classList.remove("bg-white/10", "text-slate-200");
+          btn.classList.add("bg-white", "text-slate-950");
+          activeFilter = btn.dataset.navFilter || "all";
+          renderCatalog();
+        });
+      });
+
+      // Category jump buttons
+      document.querySelectorAll("[data-cat-jump]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeFilter = btn.dataset.catJump;
+          const targetSection = document.getElementById("marketplace-catalog");
+          targetSection?.scrollIntoView({ behavior: 'smooth' });
+          renderCatalog();
+        });
+      });
+
+      // Search Form
+      document.getElementById("marketplace-search-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const cat = document.getElementById("search-category-select").value;
+        if (cat !== "all") activeFilter = cat;
+        renderCatalog();
+        document.getElementById("marketplace-catalog")?.scrollIntoView({ behavior: "smooth" });
+      });
+
+      // Live search input
+      document.getElementById("search-input")?.addEventListener("input", () => {
+        renderCatalog();
+      });
+
+      // Sort Select
+      document.getElementById("sort-select")?.addEventListener("change", (e) => {
+        activeSort = e.target.value;
+        renderCatalog();
+      });
+
+      // Reset Button
+      document.getElementById("reset-filters-btn")?.addEventListener("click", resetFilters);
+
+      // Promo Code Form
+      document.getElementById("promo-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const code = document.getElementById("promo-input").value.trim().toUpperCase();
+        const feedback = document.getElementById("promo-feedback");
+        if (code === "SANDY10") {
+          isPromoApplied = true;
+          feedback.textContent = "✓ 10% discount applied successfully!";
+          feedback.classList.remove("hidden", "text-red-500");
+          feedback.classList.add("text-emerald-600");
+          updateCartUI();
+          showToast("SANDY10 Promo Applied!", "🏷️");
+        } else {
+          feedback.textContent = "✕ Invalid code. Try SANDY10";
+          feedback.classList.remove("hidden", "text-emerald-600");
+          feedback.classList.add("text-red-500");
+        }
+      });
+
+      // Copy Promo Buttons
+      const copyPromo = () => {
+        navigator.clipboard?.writeText("SANDY10");
+        showToast("Coupon SANDY10 copied to clipboard!", "📋");
+      };
+      document.getElementById("copy-promo-top")?.addEventListener("click", copyPromo);
+
+      // Place Order & Receipt
+      document.getElementById("place-order-btn")?.addEventListener("click", () => {
+        if (cart.length === 0) {
+          showToast("Your cart is empty!", "⚠️");
+          return;
+        }
+        closeCart();
+        const modal = document.getElementById("order-receipt-modal");
+        document.getElementById("receipt-order-id").textContent = `#SM-${Math.floor(10000 + Math.random() * 90000)}`;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        // Clear cart after checkout
+        cart = [];
+        isPromoApplied = false;
+        updateCartUI();
+      });
+
+      document.getElementById("close-receipt-btn")?.addEventListener("click", () => {
+        document.getElementById("order-receipt-modal").classList.add("hidden");
+        document.getElementById("order-receipt-modal").classList.remove("flex");
+      });
+
+      // Countdown Timer Logic
+      setInterval(() => {
+        const secEl = document.getElementById("timer-secs");
+        const minEl = document.getElementById("timer-mins");
+        const hrEl = document.getElementById("timer-hours");
+        if (!secEl) return;
+
+        let s = parseInt(secEl.textContent) - 1;
+        let m = parseInt(minEl.textContent);
+        let h = parseInt(hrEl.textContent);
+
+        if (s < 0) {
+          s = 59;
+          m -= 1;
+          if (m < 0) {
+            m = 59;
+            h = Math.max(0, h - 1);
+          }
+        }
+
+        secEl.textContent = s < 10 ? '0' + s : s;
+        minEl.textContent = m < 10 ? '0' + m : m;
+        hrEl.textContent = h < 10 ? '0' + h : h;
+      }, 1000);
+
+      // Hero slides
+      const slides = [
+        {
+          badge: "SANDY PRIME FESTIVAL • UP TO 65% OFF",
+          title: "Next-Gen Tech & Super Deals Delivered Fast.",
+          sub: "Flagship audio, RGB mechanical keyboards, streetwear sneakers, and smart home essentials with guaranteed Prime dispatch.",
+          bg: "from-[#1D4ED8] via-[#7C3AED] to-[#EC4899]",
+          card: {
+            title: "Sony WH-1000XM6 ANC",
+            tag: "Prime Deal • 42% OFF",
+            price: "₹18,999",
+            mrp: "₹32,990",
+            img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85",
+            id: "anc-headphones"
+          }
+        },
+        {
+          badge: "GAMING RIGS MEGA DROP • 35% OFF",
+          title: "Pro Esports Decks & Tactile RGB Precision.",
+          sub: "Precision CNC aluminium mechanical boards, 8000Hz polling mice, and studio condenser mics ready for streaming.",
+          bg: "from-[#7C3AED] via-[#4338CA] to-[#06B6D4]",
+          card: {
+            title: "Keychron Q1 Pro RGB",
+            tag: "Esports Edition",
+            price: "₹12,499",
+            mrp: "₹17,999",
+            img: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=900&q=85",
+            id: "rgb-keyboard"
+          }
+        },
+        {
+          badge: "STREETWEAR SNEAKER DROPS • FLAT 50% OFF",
+          title: "Hype Kicks & Fresh Apparel For The Streets.",
+          sub: "Exclusive sneaker releases, heavyweight cotton hoodies, and retro leather jackets with instant Prime unboxing.",
+          bg: "from-[#EA580C] via-[#DB2777] to-[#7C3AED]",
+          card: {
+            title: "Nike Dunk Low Retro Panda",
+            tag: "Hype Release",
+            price: "₹8,295",
+            mrp: "₹11,995",
+            img: "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=85",
+            id: "dunk-sneakers"
+          }
+        }
+      ];
+
+      function setHeroSlide(idx) {
+        activeSlide = idx;
+        const s = slides[idx];
+        document.getElementById("hero-badge-text").textContent = s.badge;
+        document.getElementById("hero-title").innerHTML = s.title.replace("Super Deals", '<span class="text-[#FF9900]">Super Deals</span>');
+        document.getElementById("hero-subtitle").textContent = s.sub;
+        
+        const card = s.card;
+        document.getElementById("hero-card-title").textContent = card.title;
+        document.getElementById("hero-card-tag").textContent = card.tag;
+        document.getElementById("hero-card-price").textContent = card.price;
+        document.getElementById("hero-card-mrp").textContent = card.mrp;
+        document.getElementById("hero-card-img").src = card.img;
+        document.getElementById("hero-quick-add").dataset.productId = card.id;
+
+        const bg = document.getElementById("hero-bg-gradient");
+        bg.className = `absolute inset-0 bg-gradient-to-br ${s.bg} opacity-90 transition-all duration-700`;
+
+        document.querySelectorAll(".hero-dot").forEach((dot, dIdx) => {
+          if (dIdx === idx) {
+            dot.className = "hero-dot w-8 h-2 rounded-full bg-[#FF9900] transition-all";
+          } else {
+            dot.className = "hero-dot w-2.5 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all";
+          }
+        });
+      }
+
+      document.querySelectorAll(".hero-dot").forEach(btn => {
+        btn.addEventListener("click", () => {
+          setHeroSlide(parseInt(btn.dataset.slide));
+        });
+      });
+
+      // Spotlight Chapter switching
+      const spotItems = document.querySelectorAll(".spotlight-item");
+      spotItems.forEach(item => {
+        item.addEventListener("mouseenter", () => {
+          const idx = parseInt(item.dataset.spot);
+          switchSpotlight(idx);
+        });
+        item.addEventListener("click", () => {
+          const idx = parseInt(item.dataset.spot);
+          switchSpotlight(idx);
+        });
+      });
+
+      function switchSpotlight(idx) {
+        document.querySelectorAll(".spotlight-stage-img").forEach((img, i) => {
+          if (i === idx) {
+            img.style.opacity = "1";
+            img.style.transform = "scale(1)";
+          } else {
+            img.style.opacity = "0";
+            img.style.transform = "scale(1.05)";
+          }
+        });
+
+        const badges = ["Spotlight 01 / 03", "Spotlight 02 / 03", "Spotlight 03 / 03"];
+        const labels = ["Dual QN3 Studio Acoustic", "CNC Aluminium Per-Key RGB", "Grade-5 Aerospace Titanium"];
+        document.getElementById("spotlight-badge").textContent = badges[idx];
+        document.getElementById("spotlight-stage-label").textContent = labels[idx];
+
+        [0, 1, 2].forEach(i => {
+          const dot = document.getElementById(`spot-dot-${i}`);
+          if (dot) {
+            dot.className = i === idx ? "w-7 h-2 rounded-full bg-[#FF9900] transition-all" : "w-2.5 h-2 rounded-full bg-white/30 transition-all";
+          }
+        });
+      }
+
+      // Spotlight Add Buttons
+      document.querySelectorAll(".spotlight-add-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const prodId = btn.dataset.productId;
+          addToCart(prodId);
+        });
+      });
+
+      // Mobile Bottom Bar navigation handlers
+      document.getElementById("mb-nav-home")?.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      document.getElementById("mb-nav-deals")?.addEventListener("click", () => {
+        document.getElementById("lightning-deals")?.scrollIntoView({ behavior: "smooth" });
+      });
+      document.getElementById("mb-nav-search")?.addEventListener("click", () => {
+        const searchInput = document.getElementById("search-input");
+        searchInput?.focus();
+        document.getElementById("marketplace-catalog")?.scrollIntoView({ behavior: "smooth" });
+      });
+      document.getElementById("mb-nav-wishlist")?.addEventListener("click", () => {
+        showToast(`You have ${wishlist.size} saved items!`, "💖");
+      });
+
+      // Location change interactive prompt
+      document.getElementById("location-btn")?.addEventListener("click", () => {
+        const city = prompt("Enter your Delivery City & PIN Code:", "Madurai 625001");
+        if (city) {
+          document.getElementById("delivery-city-label").textContent = city;
+          document.getElementById("receipt-city").textContent = city;
+          showToast(`Delivery location updated to ${city}`, "📍");
+        }
+      });
+    });
+  </script>
+
+
+
+</body></html>
